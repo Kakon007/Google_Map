@@ -4,8 +4,7 @@ import 'package:google_map_flutter_app/homepage.dart';
 import 'package:google_map_flutter_app/mapscreen.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-// import 'package:geocoder/geocoder.dart';
-// import 'package:geocoding/geocoding.dart';
+
 
 
 void main() {
@@ -24,7 +23,7 @@ class MyApp extends StatelessWidget {
 
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: TapEventsOnMap(),
+      home: MapScreen(),
     );
   }
 }
