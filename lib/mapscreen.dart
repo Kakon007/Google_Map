@@ -105,12 +105,44 @@ class _MapScreenState extends State<MapScreen> {
               return Container(
                 child: new Wrap(
                   children: <Widget>[
-                    new ListTile(
-                        leading: new Icon(Icons.shopping_bag),
-                        title: new Text("Ishraak Solutions is looking for some Senior App Developers with Flutter expertise. "
-                            "The primary role will be creating/modifying cross-platform applications (iOS, Android, and others) using "
-                            "Google's Flutter development framework."),
-                        onTap: () => {}),
+                    Column(
+                      children: [
+                        Row(
+                          children: [
+                            Expanded(child: Image.asset("asste/jobe.jpg")),
+                            SizedBox(width: 5,),
+                            Expanded(child: Column(
+                              children: [
+                                Text("Senior developer(Flutter)"),
+                                Text("Ishraak Solutions Limited"),
+                                Text("Dhaka,Bangladesh"),
+                                Text("60000-100000 BDT")
+                              ],
+                            )),
+                            SizedBox(width: 5,),
+                             Padding(
+                               padding: const EdgeInsets.all(8.0),
+                               child: Icon(Icons.favorite),
+                             )
+
+                          ],
+                        ),
+                        SizedBox(height: 10,),
+                        Row(
+                          children: [
+                            Icon(Icons.lock_clock),
+                            Expanded(child: Text("Posted On 26/11/2020")),
+                            SizedBox(width: 5,),
+                            Text("Deadline in 15 days"),
+                            SizedBox(width: 5,),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: RaisedButton(onPressed: (){},color: Colors.yellow,child: Text("Details"),),
+                            )
+                          ],
+                        )
+                      ],
+                    )
                     // new ListTile(
                     //   leading: new Icon(Icons.videocam),
                     //   title: new Text('Video'),
@@ -147,9 +179,9 @@ class _MapScreenState extends State<MapScreen> {
               //   },
               // );
 
-             showFloatingFlushbar(context);
+             //showFloatingFlushbar(context);
 
-              //displayModalBottomSheet(context);
+              displayModalBottomSheet(context);
             }
           ),
           onTap: () {
