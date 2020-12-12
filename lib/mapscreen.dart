@@ -109,7 +109,7 @@ class _MapScreenState extends State<MapScreen> {
                       children: [
                         Row(
                           children: [
-                            Expanded(child: Image.asset("asste/jobe.jpg")),
+                            Expanded(child: Image.asset("asste/ish.png")),
                             SizedBox(width: 5,),
                             Expanded(child: Column(
                               children: [
@@ -127,10 +127,13 @@ class _MapScreenState extends State<MapScreen> {
 
                           ],
                         ),
-                        SizedBox(height: 10,),
+                        //SizedBox(height: 10,),
                         Row(
                           children: [
-                            Icon(Icons.lock_clock),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Icon(Icons.lock_clock),
+                            ),
                             Expanded(child: Text("Posted On 26/11/2020")),
                             SizedBox(width: 5,),
                             Text("Deadline in 15 days"),
@@ -155,7 +158,7 @@ class _MapScreenState extends State<MapScreen> {
       }
 
 
-      //////MARKER/////////////////////////////////////
+      //////MARKER/////////////////////////////////
 
       setMarker.add(
         Marker(
@@ -163,7 +166,7 @@ class _MapScreenState extends State<MapScreen> {
           icon: bitmapDescriptor,
           position: LatLng(lat1, lng1),
           infoWindow: InfoWindow(
-            title: dataList.first.companyName,
+            title: dataList.first.jobtype,
             snippet: ("Tap For Job Details"),
             onTap: (){
               // _scaffoldKey.currentState.showSnackBar(SnackBar(
@@ -217,48 +220,52 @@ class _MapScreenState extends State<MapScreen> {
         ),
 
       );
-      // setMarker.add(
-      //   Marker(
-      //
-      //     markerId: MarkerId(id2),
-      //     position: LatLng(lat2, lng2),
-      //     infoWindow: InfoWindow(
-      //       title: dataList.last.companyName,
-      //       snippet: dataList.last.jobtitle,
-      //     ),
-      //     onTap: () {
-      //       _scaffoldKey.currentState.showBottomSheet(
-      //             (BuildContext context) {
-      //           return AlertDialog(
-      //             title: new Text("Ishraak Solutions Limited"),
-      //             content: new Text("Software Company"),
-      //             backgroundColor: Colors.white,
-      //             shape: RoundedRectangleBorder(
-      //                 borderRadius: new BorderRadius.circular(15)),
-      //             actions: <Widget>[
-      //               new FlatButton(
-      //                 child: new Text("Go To Details Page"),
-      //                 textColor: Colors.greenAccent,
-      //                 onPressed: () {
-      //                   // this._yesOnPressed();
-      //                 },
-      //               ),
-      //               new FlatButton(
-      //                 child: Text("No"),
-      //                 textColor: Colors.redAccent,
-      //                 onPressed: () {
-      //                   // this._noOnPressed();
-      //                 },
-      //               ),
-      //             ],
-      //           );
-      //           // Navigator.push(context, MaterialPageRoute(builder: (context)=>JobDetails()));
-      //         },
-      //       );
-      //     },
-      //   ),
-      //
-      // );
+      setMarker.add(
+        Marker(
+
+          markerId: MarkerId(id2),
+          icon: bitmapDescriptor,
+          position: LatLng(lat2, lng2),
+          infoWindow: InfoWindow(
+            title: dataList.last.jobtype,
+            snippet: dataList.last.jobtitle,
+            onTap: (){
+              displayModalBottomSheet(context);
+            },
+          ),
+          onTap: () {
+            _scaffoldKey.currentState.showBottomSheet(
+                  (BuildContext context) {
+                return AlertDialog(
+                  title: new Text("Tiger IT"),
+                  content: new Text("Software Company"),
+                  backgroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(15)),
+                  actions: <Widget>[
+                    new FlatButton(
+                      child: new Text("Go To Details Page"),
+                      textColor: Colors.greenAccent,
+                      onPressed: () {
+                        // this._yesOnPressed();
+                      },
+                    ),
+                    new FlatButton(
+                      child: Text("No"),
+                      textColor: Colors.redAccent,
+                      onPressed: () {
+                        // this._noOnPressed();
+                      },
+                    ),
+                  ],
+                );
+                // Navigator.push(context, MaterialPageRoute(builder: (context)=>JobDetails()));
+              },
+            );
+          },
+        ),
+
+      );
     });
   }
 
@@ -309,7 +316,7 @@ class _MapScreenState extends State<MapScreen> {
       home: Scaffold(
         key: _scaffoldKey,
         appBar: AppBar(
-          title: Text('Search Job Location'),
+          title: Text('Search Job Location',style: TextStyle(color: Colors.black),),
           backgroundColor: Colors.yellow,
         ),
         body: FutureBuilder(
@@ -328,6 +335,7 @@ class _MapScreenState extends State<MapScreen> {
                       _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("Latitude: ${latLng.latitude}, Longitude: ${latLng.longitude}"),));
                     },
                     myLocationButtonEnabled: true,
+                    padding: EdgeInsets.only(top: 530,right: 20),
                     myLocationEnabled: true,
                     markers: setMarker,
                     onMapCreated: _onMapCreated,
@@ -352,7 +360,7 @@ class _MapScreenState extends State<MapScreen> {
 
   _searchlocation() {
     return Positioned(
-      top: 60,
+      top: 40,
       left: 15,
       right: 15,
       child: Container(
@@ -398,168 +406,3 @@ class _MapScreenState extends State<MapScreen> {
     // });
   }
 }
-
-// class GoogleMapTile extends StatefulWidget {
-//   var id,jobtype,companyName,latitude,longitude;
-//   GoogleMapTile({@required this.id,@required this.jobtype,@required this.companyName,@required this.latitude,@required this.longitude});
-//   @override
-//   _GoogleMapTileState createState() => _GoogleMapTileState();
-// }
-//
-// class _GoogleMapTileState extends State<GoogleMapTile> {
-//   GoogleMapController _controller;
-//   static GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-//   String searchaddress;
-//   Future<MapDataModel> jobs;
-//   static const LatLng _center = const LatLng(23.773649, 90.411472);
-//   static const LatLng _anotherLatLng = const LatLng(23.782448, 90.421682);
-//
-//
-//   void _onMapCreated(GoogleMapController controller) {
-//     setState(() {
-//       _controller=controller;
-//     });
-//   }
-//
-//
-//   static MarkerId markerId1 = MarkerId("1");
-//   static MarkerId markerId2 = MarkerId("12");
-//
-//   final Set<Marker> _markers = {
-//     Marker(
-//       markerId: markerId1,
-//       position: _center,
-//       infoWindow: InfoWindow(
-//         title: 'IshRaak Solutions Limited',
-//         snippet: 'Ishraak.com',
-//       ),
-//       onTap: (){
-//         _scaffoldKey.currentState.showBottomSheet((BuildContext context) {
-//           return AlertDialog(
-//             title: new Text("Ishraak Solutions Limited"),
-//             content: new Text("Software Company"),
-//             backgroundColor: Colors.white,
-//             shape:
-//             RoundedRectangleBorder(borderRadius: new BorderRadius.circular(15)),
-//             actions: <Widget>[
-//               new FlatButton(
-//                 child: new Text("Go To Details Page"),
-//                 textColor: Colors.greenAccent,
-//                 onPressed: () {
-//                   // this._yesOnPressed();
-//                 },
-//               ),
-//               new FlatButton(
-//                 child: Text("No"),
-//                 textColor: Colors.redAccent,
-//                 onPressed: () {
-//                   // this._noOnPressed();
-//                 },
-//               ),
-//             ],
-//           );
-//           // Navigator.push(context, MaterialPageRoute(builder: (context)=>JobDetails()));
-//         },
-//         );
-//       },
-//     ),
-//     Marker(
-//       markerId: markerId2,
-//       position: _anotherLatLng,
-//       infoWindow: InfoWindow(
-//         title: 'Tiger IT Limited',
-//         snippet: 'Tigerit.com',
-//       ),
-//       onTap: (){
-//         _scaffoldKey.currentState.showBottomSheet((BuildContext context) {
-//           return AlertDialog(
-//             title: new Text("Tiger IT Limited"),
-//             content: new Text("Software Company"),
-//             backgroundColor: Colors.white,
-//             shape:
-//             RoundedRectangleBorder(borderRadius: new BorderRadius.circular(15)),
-//             actions: <Widget>[
-//               new FlatButton(
-//                 child: new Text("Go To Details Page"),
-//                 textColor: Colors.redAccent,
-//                 onPressed: () {
-//                   // this._yesOnPressed();
-//                 },
-//               ),
-//               new FlatButton(
-//                 child: Text("No"),
-//                 textColor: Colors.redAccent,
-//                 onPressed: () {
-//                   // this._noOnPressed();
-//                 },
-//               ),
-//             ],
-//           );
-//           // Navigator.push(context, MaterialPageRoute(builder: (context)=>JobDetails()));
-//         },
-//         );
-//       },
-//
-//
-//     )
-//   };
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       child: Stack(
-//         children: [
-//           GoogleMap(
-//             onTap: (latLng){
-//               _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("Latitude: ${latLng.latitude}, Longitude: ${latLng.longitude}"),));
-//             },
-//             markers: _markers,
-//             onMapCreated: _onMapCreated,
-//             initialCameraPosition: CameraPosition(
-//               target: _center,
-//               zoom: 11.0,
-//             ),
-//           ),
-//           _searchlocation(),
-//         ],
-//       ),
-//     );
-//   }
-//   _searchlocation(){
-//     return Positioned(
-//       top: 30,
-//       left: 15,
-//       right: 15,
-//       child: Container(
-//         height: 50,
-//         width: double.infinity,
-//         decoration: BoxDecoration(
-//             borderRadius: BorderRadius.all(Radius.circular(10)),
-//             color: Colors.white
-//         ),
-//         child: TextField(
-//           decoration: InputDecoration(
-//               hintText: "Enter Address",
-//               alignLabelWithHint: true,
-//               border: InputBorder.none,
-//               contentPadding: EdgeInsets.only(top:15,left: 15,right: 15),
-//               suffixIcon: IconButton(icon: Icon(Icons.search) ,onPressed: searchaddressandNav,iconSize: 30,)
-//           ),
-//           onChanged: (value){
-//             setState(() {
-//               searchaddress=value;
-//             });
-//           },
-//         ),
-//
-//       ),
-//     );
-//   }
-//   searchaddressandNav(){
-//     Geolocator().placemarkFromAddress(searchaddress).then((result) {
-//       _controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
-//           target:
-//           LatLng(result[0].position.latitude, result[0].position.longitude),
-//           zoom: 10.0)));
-//     });
-//   }
-// }
