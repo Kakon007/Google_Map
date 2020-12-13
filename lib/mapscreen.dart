@@ -157,6 +157,29 @@ class _MapScreenState extends State<MapScreen> {
             });
       }
 
+      Widget displayModalBottomSheetForCompany(context) {
+        showModalBottomSheet(
+            context: context,
+            builder: (BuildContext bc) {
+              return Container(
+                child: new Wrap(
+                  children: <Widget>[
+
+                    ListTile(
+                      leading: Icon(Icons.home),
+                      title:  Text("Ishraak Solutions Limited",style: TextStyle(fontWeight: FontWeight.bold),),
+                      subtitle: Text("We are a software company with a special focus on Artificial Intelligence/Machine Learning. "
+                          "We develop web and mobile applications."
+                          " We also offer professional training on Machine Learning, Deep learning and other software development courses."
+                          "Our team comprises talented professionals expert in cutting edge technologies and state of the art engineering processes."),
+                      onTap: () => {},
+                    ),
+                  ],
+                ),
+              );
+            });
+      }
+
 
       //////MARKER/////////////////////////////////
 
@@ -167,7 +190,7 @@ class _MapScreenState extends State<MapScreen> {
           position: LatLng(lat1, lng1),
           infoWindow: InfoWindow(
             title: dataList.first.jobtype,
-            snippet: ("Tap For Job Details"),
+            snippet: dataList.first.companyName,
             onTap: (){
               // _scaffoldKey.currentState.showSnackBar(SnackBar(
               //   duration: const Duration(seconds: 10),
@@ -188,34 +211,35 @@ class _MapScreenState extends State<MapScreen> {
             }
           ),
           onTap: () {
-            _scaffoldKey.currentState.showBottomSheet(
-                  (BuildContext context) {
-                return AlertDialog(
-                  title: new Text("Ishraak Solutions Limited"),
-                  content: new Text("Software Company"),
-                  backgroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(15)),
-                  actions: <Widget>[
-                    new FlatButton(
-                      child: new Text("Go To Details Page"),
-                      textColor: Colors.yellow,
-                      onPressed: () {
-                        // this._yesOnPressed();
-                      },
-                    ),
-                    new FlatButton(
-                      child: Text("No"),
-                      textColor: Colors.redAccent,
-                      onPressed: () {
-                        // this._noOnPressed();
-                      },
-                    ),
-                  ],
-                );
-                // Navigator.push(context, MaterialPageRoute(builder: (context)=>JobDetails()));
-              },
-            );
+            // _scaffoldKey.currentState.showBottomSheet(
+            //       (BuildContext context) {
+            //     return AlertDialog(
+            //       title: new Text("Ishraak Solutions Limited"),
+            //       content: new Text("Software Company"),
+            //       backgroundColor: Colors.white,
+            //       shape: RoundedRectangleBorder(
+            //           borderRadius: new BorderRadius.circular(15)),
+            //       actions: <Widget>[
+            //         new FlatButton(
+            //           child: new Text("Go To Details Page"),
+            //           textColor: Colors.yellow,
+            //           onPressed: () {
+            //             // this._yesOnPressed();
+            //           },
+            //         ),
+            //         new FlatButton(
+            //           child: Text("No"),
+            //           textColor: Colors.redAccent,
+            //           onPressed: () {
+            //             // this._noOnPressed();
+            //           },
+            //         ),
+            //       ],
+            //     );
+            //     // Navigator.push(context, MaterialPageRoute(builder: (context)=>JobDetails()));
+            //   },
+            // );
+            displayModalBottomSheetForCompany(context);
           },
         ),
 
@@ -234,34 +258,36 @@ class _MapScreenState extends State<MapScreen> {
             },
           ),
           onTap: () {
-            _scaffoldKey.currentState.showBottomSheet(
-                  (BuildContext context) {
-                return AlertDialog(
-                  title: new Text("Tiger IT"),
-                  content: new Text("Software Company"),
-                  backgroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(15)),
-                  actions: <Widget>[
-                    new FlatButton(
-                      child: new Text("Go To Details Page"),
-                      textColor: Colors.greenAccent,
-                      onPressed: () {
-                        // this._yesOnPressed();
-                      },
-                    ),
-                    new FlatButton(
-                      child: Text("No"),
-                      textColor: Colors.redAccent,
-                      onPressed: () {
-                        // this._noOnPressed();
-                      },
-                    ),
-                  ],
-                );
-                // Navigator.push(context, MaterialPageRoute(builder: (context)=>JobDetails()));
-              },
-            );
+            // _scaffoldKey.currentState.showBottomSheet(
+            //       (BuildContext context) {
+            //     return AlertDialog(
+            //       title: new Text("Tiger IT"),
+            //       content: new Text("Software Company"),
+            //       backgroundColor: Colors.white,
+            //       shape: RoundedRectangleBorder(
+            //           borderRadius: new BorderRadius.circular(15)),
+            //       actions: <Widget>[
+            //         new FlatButton(
+            //           child: new Text("Go To Details Page"),
+            //           textColor: Colors.greenAccent,
+            //           onPressed: () {
+            //             // this._yesOnPressed();
+            //           },
+            //         ),
+            //         new FlatButton(
+            //           child: Text("No"),
+            //           textColor: Colors.redAccent,
+            //           onPressed: () {
+            //             // this._noOnPressed();
+            //           },
+            //         ),
+            //       ],
+            //     );
+            //     // Navigator.push(context, MaterialPageRoute(builder: (context)=>JobDetails()));
+            //   },
+            // );
+
+            displayModalBottomSheetForCompany(context);
           },
         ),
 
@@ -343,6 +369,7 @@ class _MapScreenState extends State<MapScreen> {
                       target: _center,
                       zoom: 12.0,
                     ),
+                    mapType: MapType.normal,
                   ),
 
                   _searchlocation(),
